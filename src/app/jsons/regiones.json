@@ -1,0 +1,112 @@
+[
+	{
+		"pais": "Alemania",
+		"gentilicio": "Alemana",
+		"continente": "Europa"
+	},
+	{
+		"pais": "Argentina",
+		"gentilicio": "Argentina",
+		"continente": "Sur América"
+	},
+	{
+		"pais": "Bolivia",
+		"gentilicio": "Boliviana",
+		"continente": "Sur América"
+	},
+	{
+		"pais": "Brasil",
+		"gentilicio": "Brasilera",
+		"continente": "Sur América"
+	},
+	{
+		"pais": "Chile",
+		"gentilicio": "Chilena",
+		"continente": "Sur América"
+	},
+	{
+		"pais": "China",
+		"gentilicio": "China",
+		"continente": "Asis"
+	},
+	{
+		"pais": "Colombia",
+		"gentilicio": "Colombiana",
+		"continente": "Sur América"
+	},
+	{
+		"pais": "Ecuador",
+		"gentilicio": "Ecuatoriana",
+		"continente": "Sur América"
+	},
+	{
+		"pais": "España",
+		"gentilicio": "Española",
+		"continente": "Europa"
+	},
+	{
+		"pais": "Estados Unidos",
+		"gentilicio": "Norteamericana",
+		"continente": "Norte América"
+	},
+	{
+		"pais": "Francia",
+		"gentilicio": "Francesa",
+		"continente": "Europa"
+	},
+	{
+		"pais": "Italia",
+		"gentilicio": "Italiana",
+		"continente": "Europa"
+	},
+	{
+		"pais": "Jamaica",
+		"gentilicio": "Jamaiquina",
+		"continente": "Centro América"
+	},
+	{
+		"pais": "Japon",
+		"gentilicio": "Japonesa",
+		"continente": "Asia"
+	},
+	{
+		"pais": "México",
+		"gentilicio": "Mexicana",
+		"continente": "Centro América"
+	},
+	{
+		"pais": "Panama",
+		"gentilicio": "Panameña",
+		"continente": "Centro América"
+	},
+	{
+		"pais": "Paraguay",
+		"gentilicio": "Paraguaya",
+		"continente": "Sur América"
+	},
+	{
+		"pais": "Peru",
+		"gentilicio": "Peruana",
+		"continente": "Sur América"
+	},
+	{
+		"pais": "Puerto Rico",
+		"gentilicio": "Puertoriquense",
+		"continente": "Centro América"
+	},
+	{
+		"pais": "Reino Unido",
+		"gentilicio": "Britanica",
+		"continente": "Europa"
+	},
+	{
+		"pais": "Uruguay",
+		"gentilicio": "Ururguaya",
+		"continente": "Sur América"
+	},
+	{
+		"pais": "Venezuela",
+		"gentilicio": "Venezonala",
+		"continente": "Sur América"
+	}
+ ]

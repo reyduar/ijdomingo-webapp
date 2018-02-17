@@ -1,0 +1,98 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,900);
+
+* { 
+	margin: 0;
+	padding: 0px;
+} 
+
+body { 
+	background: #ffffff; 
+	margin: 0; 
+	height: 100%; 
+	color: #384452;
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6, label {
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+}
+
+p { 
+	padding: 0; 
+	margin-bottom: 12px; 
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+	font-size: 14px; 
+	line-height: 24px;
+	color: #384452; 
+	margin-top: 10px; 
+}
+
+.spacing-less {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.spacing {
+    padding-top: 10px;
+    padding-top-bottom: 10px;
+}
+
+.spacing-big {
+    margin-top: 119px;
+}
+
+.calendar-btn {
+	padding: 2px;
+	font-size: 16px;
+}
+
+.asi-calendar-btn {
+	padding: 2px;
+	font-size: 16px;
+}
+
+.navbar-av {
+	margin-top: 50px;
+    background: #f5f5f5;
+}
+
+.navbar-brand {
+	font-family: 'Lato', sans-serif;
+    font-weight: bold;
+}
+
+.alert-custom {
+	font-size: 20px;
+	font-family: 'Lato', sans-serif;
+	font-weight: bold;
+}
+
+.inner-addon {
+  position: relative;
+}
+
+/* style glyph */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align glyph */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+.ui-notification {
+	position: fixed;
+    z-index: 9999;
+
+    width: 100%;
+    opacity: 0.9;
+}

@@ -1,0 +1,64 @@
+<nav class="navbar-av navbar-fixed-top">
+    <div class="container" style="padding-top: 10px;">
+        <div class="navbar-brand">
+            Docentes
+        </div>
+
+         <div class="btn-group pull-right">
+            <div excel-export export-data="docCtrl.exportData" file-name="{{docCtrl.fileName}}"></div>
+            <button id="curso" class="btn btn-success btn-lg" type="button" ng-click="docCtrl.mostrarAgregarDocenteModal()">
+               <strong style="font-size: 14px;"> <i class="glyphicon glyphicon-plus-sign"></i> Nuevo Docente</strong>
+            </button>
+        </div>
+    </div>
+</nav>
+<div class="spacing-big"></div>
+    <nav class="navbar-av navbar-fixed-top">
+        <div class={{docCtrl.alert}} role="alert" ng-show="docCtrl.mostarMensaje">
+            <div class="alert-custom">
+                <button type="button" class="close" ng-click="docCtrl.dismissAlert()">&times;</button>
+                <i class={{docCtrl.icon}}></i>
+                {{docCtrl.alertMsg}}
+            </div>
+        </div>
+    </nav>
+<div class="container">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+        <input id="search" type="text" class="form-control input-lg" name="search" placeholder="Buscar por DNI" ng-model="dniDocente">
+    </div>
+    <table class="table table-hover table-striped table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center">DNI</th>
+            	<th class="text-center">Nombre</th>
+                <th class="text-center">Apellido</th>
+                <th class="text-center">Celular</th>
+                <th class="text-center">Ocupación</th>
+                <th class="text-center">Operaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="doc in docCtrl.docentes | searchDocenteForDni:dniDocente">
+                <td>{{ doc.dni }}</td>
+                <td>{{ doc.nombre }}</td>
+                <td>{{ doc.apellido }}</td>
+                <td>{{ doc.celular }}</td>
+                <td>{{ doc.ocupacion }}</td>
+                <td class="text-center">
+                        <div class="btn-group">
+                            <a ng-click="docCtrl.verOnClick(doc)" class="btn btn-sm btn-info"> 
+                            <i class="fa fa-search"></i> Mostrar
+                        </a>
+                        <a ng-click="docCtrl.mostrarAgregarDocenteModal(doc)" class="btn btn-sm btn-warning"> 
+                            <i class="fa fa-pencil"></i> Editar
+                        </a>
+                        <a ng-click="docCtrl.borrarOnClick($index, doc._id)" class="btn btn-sm btn-danger"> 
+                            <i class="fa fa-trash"></i> Borrar 
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

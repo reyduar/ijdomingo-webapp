@@ -1,0 +1,24 @@
+
+<div class="modal-header">
+    <button id="cerrar" type="button" class="close" ng-click="cursoModalCtrl.cerrar()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4><span style="font-weight:bold;">{{cursoModalCtrl.titulo}}</span></h4>
+</div>
+<form ng-submit="cursoModalCtrl.onClickGuardar()">
+<div id="modal-alumno" class="modal-body">
+    <div class="form-group">
+
+        <div id="alert_info_id" class={{cursoModalCtrl.alert}} role="alert" ng-show="cursoModalCtrl.mostarMensaje">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <strong>{{cursoModalCtrl.alertType}} </strong> {{cursoModalCtrl.alertMsg}}
+        </div>
+    </div>
+    <div class="form-group">
+        <input id="nombre" ng-model="cursoModalCtrl.nombre" class="form-control" type="text" placeholder="Ingrese el nombre del curso" required autofocus>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="guardar" class="btn btn-primary" type="submit">
+        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Guardar
+    </button>
+</div>
+</form>

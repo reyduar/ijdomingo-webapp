@@ -1,0 +1,26 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+       <a class="navbar-brand" href ui-sref="home">
+        <img alt="Logo" src="favicon.ico" width="30">
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-controller="NavController as navCtrl">
+      <ul class="nav navbar-nav">
+        <li ui-sref-active="active"><a href ui-sref="home">Inicio</a></li>
+        <li ng-if="navCtrl.user" ui-sref-active="active"><a href ui-sref="inscripciones">Inscripciones</a></li>
+        <li ng-if="navCtrl.user" ui-sref-active="active"><a href ui-sref="asistencias">Asistencias</a></li>
+        <li ng-if="navCtrl.user" ui-sref-active="active"><a href ui-sref="docentes">Docentes</a></li>
+        <li ng-if="navCtrl.user" ui-sref-active="active"><a href ui-sref="alumnos">Alumnos</a></li>
+        <li ng-if="navCtrl.user" ui-sref-active="active"><a href ui-sref="cursos">Cursos</a></li>
+        <li ng-if="navCtrl.user" ui-sref-active="active"><a href ui-sref="notas">Notas</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-if="navCtrl.user" ui-sref-active="active"><a href ng-click="navCtrl.mostrarLoginModal()">Login</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

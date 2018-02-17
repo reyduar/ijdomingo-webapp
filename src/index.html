@@ -1,0 +1,67 @@
+<html ng-app="app">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inscripciones</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="css/styles.css" />
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:400,900" />
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="css/select.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+</head>
+<body>
+  <!-- Header here -->
+  <div ng-include src="'app/views/header.html'"></div>
+  <!-- Contents here-->
+  <div ng-include src="'app/views/content.html'"></div>
+  <!-- Footer here-->
+  <div ng-include src="'app/views/footer.html'"></div> 
+  
+  <!-- JQuery Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+  <!-- Bootstrap Library -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.1/jszip.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.1/xlsx.js"></script>
+  <!-- Angular Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.2/angular-sanitize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
+  <script type="text/javascript" src="js/select.js"></script>
+   
+  <!-- My js files [conf, controllers, services]  -->
+  <script type="text/javascript" src="env.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  
+  <script type="text/javascript" src="app/controllers/homeController.js"></script>
+  <script type="text/javascript" src="app/controllers/cursoController.js"></script>
+  <script type="text/javascript" src="app/controllers/docenteController.js"></script>
+  <script type="text/javascript" src="app/controllers/alumnoController.js"></script>
+  <script type="text/javascript" src="app/controllers/inscripcionController.js"></script>
+  <script type="text/javascript" src="app/controllers/notaController.js"></script>
+  <script type="text/javascript" src="app/controllers/editarInscripcionController.js"></script>
+  <script type="text/javascript" src="app/controllers/asistenciaController.js"></script>
+  <script type="text/javascript" src="app/controllers/docenteModalController.js"></script>
+  <script type="text/javascript" src="app/controllers/alumnoModalController.js"></script>
+  <script type="text/javascript" src="app/controllers/notaModalController.js"></script>
+  <script type="text/javascript" src="app/controllers/cursoModalController.js"></script>
+  <script type="text/javascript" src="app/controllers/navController.js"></script>
+  <script type="text/javascript" src="app/controllers/loginController.js"></script>
+  <script type="text/javascript" src="app/services/apiService.js"></script>
+  <script type="text/javascript" src="app/directives/excelExportDirective.js"></script>
+</body>
+</html>

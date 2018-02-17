@@ -1,0 +1,80 @@
+<nav class="navbar-av navbar-fixed-top">
+    <div class="container" style="padding-top: 10px;">
+        <div class="navbar-brand">
+            Notas
+        </div>
+
+         <div class="btn-group pull-right">
+            <div excel-export export-data="notaCtrl.exportData" file-name="{{notaCtrl.fileName}}"></div>
+            <button id="nota" class="btn btn-success btn-lg" type="button" ng-click="notaCtrl.agregarNota()">
+               <strong style="font-size: 14px;"> <i class="glyphicon glyphicon-plus-sign"></i> Agregar Nota</strong>
+            </button>
+        </div>
+    </div>
+</nav>
+<div class="spacing-big"></div>
+    <nav class="navbar-av navbar-fixed-top">
+        <div class={{notaCtrl.alert}} role="alert" ng-show="notaCtrl.mostarMensaje">
+            <div class="alert-custom">
+                <button type="button" class="close" ng-click="notaCtrl.dismissAlert()">&times;</button>
+                <i class={{notaCtrl.icon}}></i>
+                {{notaCtrl.alertMsg}}
+            </div>
+        </div>
+    </nav>
+<div class="container">
+    <div class="form-group">
+            <a href class="pull-right" ng-click="notaCtrl.restarFiltro()"><small>Limpiar filtro<small></a>
+            <h5><strong>Filtrar por Curso</strong></h5>
+            <ui-select ng-model="notaCtrl.cursoSeleccionado" theme="selectize" on-select="notaCtrl.filterPorCurso($select.selected.nombre)">
+            <ui-select-match placeholder=" -- Busca y selecciona un curso como filtro --" required>
+                {{$select.selected.nombre}}
+            </ui-select-match>
+            <ui-select-choices repeat="curso in notaCtrl.cursos | filter: $select.search track by curso.nombre">
+                <div ng-bind-html="curso.nombre | highlight: $select.search"></div>
+            </ui-select-choices>
+            </ui-select>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+        <input id="search" type="text" class="form-control input-lg" name="search" placeholder="Buscar por DNI del Alumno" ng-model="dniAlumno">
+    </div>
+    <table class="table table-hover table-striped table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center">DNI</th>
+            	<th class="text-center">Alumno</th>
+                <th class="text-center">Curso</th>
+                <th class="text-center">Parcial</th>
+                <th class="text-center">Final</th>
+                <th class="text-center">Total</th>
+                <th class="text-center">%Asistencia</th>
+                <th class="text-center">Operaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="nota in notaCtrl.notas | filtroNotaDni:dniAlumno">
+                <td>{{nota.dni}}</td>
+                <td>{{nota.alumno}}</td>
+                <td>{{nota.curso}}</td>
+                <td>{{nota.exaparcial}}</td>
+                <td>{{nota.exafinal}}</td>
+                <td>{{nota.exatotal}}</td>
+                <td>{{nota.asistencia}}</td>  
+                <td class="text-center">
+                    <div class="btn-group">
+                          <a ng-click="notaCtrl.verOnClick(nota)" class="btn btn-sm btn-info"> 
+                        <i class="fa fa-search"></i> Mostrar
+                    </a>
+                    <a ng-click="notaCtrl.agregarNota(nota)" class="btn btn-sm btn-warning"> 
+                        <i class="fa fa-pencil"></i> Editar
+                    </a>
+                        <a ng-click="notaCtrl.borrarOnClick($index, nota)" class="btn btn-sm btn-danger"> 
+                            <i class="fa fa-trash"></i> Borrar 
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

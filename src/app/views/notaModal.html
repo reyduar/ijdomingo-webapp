@@ -1,0 +1,63 @@
+
+<div class="modal-header">
+    <button id="cerrar" type="button" class="close" ng-click="notaModalCtrl.cerrar()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4><span style="font-weight:bold;">{{notaModalCtrl.titulo}}</span></h4>
+</div>
+<form ng-submit="notaModalCtrl.onClickGuardar()">
+<div class="modal-body">
+    <div class="form-group">
+        <div id="alert_info_id" class={{notaModalCtrl.alert}} role="alert" ng-show="notaModalCtrl.mostarMensaje">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <strong>{{notaModalCtrl.alertType}} </strong> {{notaModalCtrl.alertMsg}}
+        </div>
+    </div>
+    <div class="form-group">
+        <a href class="pull-right" ng-click="notaModalCtrl.limpiar()"><small>Limpiar</small></a>
+        <label for="curso">Curso*</label>
+        <ui-select ng-model="notaModalCtrl.cursoSeleccionado" theme="selectize" on-select="notaModalCtrl.cursoOnSelect($select.selected.nombre)">
+        <ui-select-match placeholder=" -- Busca y selecciona un curso --" required>
+            {{$select.selected.nombre}}
+        </ui-select-match>
+        <ui-select-choices repeat="curso in notaModalCtrl.cursos | filter: $select.search track by curso.nombre">
+            <div ng-bind-html="curso.nombre | highlight: $select.search"></div>
+        </ui-select-choices>
+        </ui-select>
+    </div>
+   <div class="form-group">
+        <label for="alumno">Alumno*</label> 
+        <small ng-if="notaModalCtrl.inscripciones.length == 0"> <i class="fa fa-info-circle"></i>
+Seleccione un curso con alumnos inscriptos.</small>
+        <ui-select ng-model="notaModalCtrl.alumnoSeleccionado" theme="selectize" ng-disabled="notaModalCtrl.inscripciones.length == 0">
+        <ui-select-match placeholder=" -- Busca y selecciona un alumno --">
+            DNI: {{ $select.selected.dni }} | NOMBRE: {{ $select.selected.alumno }}
+        </ui-select-match>
+        <ui-select-choices repeat="aluins in notaModalCtrl.inscripciones | filter: $select.search track by $index">
+            <div ng-bind-html="aluins.alumno | highlight: $select.search"></div>
+            <small>
+                DNI: <span ng-bind-html="''+aluins.dni | highlight: $select.search"></span>
+            </small>
+        </ui-select-choices>
+        </ui-select>
+    </div>
+    <div class="form-group">
+        <label for="total">% de Asistencia</label>
+        <input id="total" ng-model="notaModalCtrl.asistencia" class="form-control" type="number">
+    </div>
+    <div class="form-group">
+        <label for="parcial">Examen Parcial</label>
+        <input id="parcial" ng-model="notaModalCtrl.exaparcial" class="form-control" type="number">
+    </div>
+     <div class="form-group">
+        <label for="final">Examen Final</label>
+        <input id="final" ng-model="notaModalCtrl.exafinal" class="form-control" type="number">
+    </div>
+     <div class="form-group">
+        <h4><strong>Total de Puntos: </strong> {{notaModalCtrl.exaparcial + notaModalCtrl.exafinal}}</h4>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="guardar" class="btn btn-primary" type="submit" ng-disabled="!notaModalCtrl.alumnoSeleccionado">
+        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Guardar
+    </button>
+</div>
+</form>
