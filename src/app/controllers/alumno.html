@@ -1,0 +1,60 @@
+<nav id="sub-nav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container" style="padding-top: 10px;">
+        <div class="navbar-brand">
+            Alumnos
+        </div>
+        <div class="btn-group pull-right">
+            <div excel-export export-data="alumnoCtrl.exportData" file-name="{{alumnoCtrl.fileName}}"></div>
+            <button id="curso" class="btn btn-primary btn-lg" type="button" ng-click="alumnoCtrl.mostrarAgregarAlumnoModal()">
+                <strong style="font-size: 14px;">
+                    <i class="glyphicon glyphicon-plus-sign"></i> Nuevo Alumno</strong>
+            </button>
+        </div>
+    </div>
+</nav>
+<div class="spacing-big"></div>
+<periodo-label></periodo-label>
+<usuario-label></usuario-label>
+<div class="spacing-big"></div>
+<div class="input-group">
+    <span class="input-group-addon">
+        <i class="glyphicon glyphicon-search"></i>
+    </span>
+    <input id="search" type="text" class="form-control input-lg" name="search" placeholder="Buscar por DNI" ng-model="alumnoDni">
+</div>
+<table class="table table-hover table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>DNI</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Localidad</th>
+            <th>Email</th>
+            <th>Celular</th>
+            <th class="text-center">Ver | Editar | Borrar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="alumno in alumnoCtrl.alumnos | FiltrarAlumnoDni:alumnoDni">
+            <td>{{alumno.dni}}</td>
+            <td>{{alumno.nombre}}</td>
+            <td>{{alumno.apellido}}</td>
+            <td>{{alumno.localidad.nombre}}</td>
+            <td>{{alumno.email}}</td>
+            <td>{{alumno.celular}}</td>
+            <td class="text-center">
+                <div class="btn-group">
+                    <a ng-click="alumnoCtrl.verOnClick(alumno)" class="btn btn-sm btn-default">
+                        <i class="fa fa-search"></i>
+                    </a>
+                    <a ng-click="alumnoCtrl.mostrarAgregarAlumnoModal(alumno)" class="btn btn-sm btn-primary">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <a ng-click="alumnoCtrl.borrarOnClick($index, alumno._id)" class="btn btn-sm btn-default">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

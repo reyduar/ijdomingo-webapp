@@ -1,0 +1,120 @@
+
+<div class="modal-header">
+    <button id="cerrar" type="button" class="close" ng-click="alumnoModalCtrl.cerrar()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4><span style="font-weight:bold;">{{alumnoModalCtrl.titulo}}</span></h4>
+</div>
+<div class="modal-body">
+    <form role="form" ng-submit="alumnoModalCtrl.onClickGuardar()">
+        <div class="row">
+            <div class="col-xs-6"></div>
+            <div class="col-xs-6">
+                <button class={{alumnoModalCtrl.colorButton}} type={{alumnoModalCtrl.typeButton}}>
+                    <span class={{alumnoModalCtrl.iconButton}}></span> {{alumnoModalCtrl.labelButton}}
+                </button>
+            </div>
+        </div>
+        
+        <div class="form-group" style="padding-top: 5px"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="dni">DNI*</label>
+                    <input id="dni" ng-model="alumnoModalCtrl.dni" class="form-control" type="text" placeholder="Ingrese el DNI sin puntos ej. 31456789" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido*</label>
+                    <input id="apellido" ng-model="alumnoModalCtrl.apellido" class="form-control" type="text" placeholder="Ingrese el apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="nacionalidad">Nacionalidad*</label>
+                    <ui-select ng-model="alumnoModalCtrl.nacionalidad" theme="selectize">
+                    <ui-select-match placeholder=" -- Busca y selecciona la nacionalidad --">
+                        {{ $select.selected.nombre }}
+                    </ui-select-match>
+                    <ui-select-choices repeat="region in alumnoModalCtrl.regiones | filter: $select.search track by region.pais">
+                        <div ng-bind-html="region.pais | highlight: $select.search"></div>
+                        <small>Nacionalidad: {{ region.nombre }}</small>
+                    </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group">
+                    <label for="provincia">Provincia*</label>
+                    <ui-select ng-model="alumnoModalCtrl.provincia" theme="selectize" on-select="alumnoModalCtrl.onSelectProvincia($item)">
+                    <ui-select-match placeholder=" -- Busca y selecciona la provincia --">
+                        {{ $select.selected.nombre }}
+                    </ui-select-match>
+                    <ui-select-choices repeat="p in alumnoModalCtrl.provincias | filter: $select.search track by p.nombre">
+                        <div ng-bind-html="p.nombre | highlight: $select.search"></div>
+                    </ui-select-choices>
+                    </ui-select>
+                </div>
+                 <div class="form-group">
+                    <label for="barrio">Barrio</label>
+                    <input id="barrio" ng-model="alumnoModalCtrl.barrio" class="form-control" type="text" placeholder="Ingrese el barrio">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" ng-model="alumnoModalCtrl.email" class="form-control" type="email" placeholder="Ingrese una dirección correo válida">
+                </div>
+                <div class="form-group">
+                    <label for="celular">Celular*</label>
+                    <input id="celular" ng-model="alumnoModalCtrl.celular" class="form-control" type="text" placeholder="Ingrese el teléfono celular" required>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="fechaNac">Fecha de Nacimiento (dia/mes/año)*: </label>
+                     <p class="input-group">
+                      <input type="text" class="form-control" uib-datepicker-popup='dd/MM/yyyy' ng-model="alumnoModalCtrl.fecnac" is-open="alumnoModalCtrl.popup.opened" datepicker-options="alumnoModalCtrl.dateOptions" close-text="Close" alt-input-formats="alumnoModalCtrl.altInputFormats" placeholder="Ej. 01/31/1985"/>
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="alumnoModalCtrl.open()"><i class="glyphicon glyphicon-calendar calendar-btn"></i></button>
+                      </span>
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre*</label>
+                    <input id="nombre" ng-model="alumnoModalCtrl.nombre" class="form-control" type="text" placeholder="Ingrese el nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="sexo">Sexo*</label>
+                    <ui-select ng-model="alumnoModalCtrl.sexo" theme="selectize">
+                    <ui-select-match placeholder=" -- Selecciona el sexo --">
+                        {{ $select.selected.nombre }}
+                    </ui-select-match>
+                    <ui-select-choices repeat="s in alumnoModalCtrl.sexos | filter: $select.search track by s.nombre">
+                        <div ng-bind-html="s.nombre | highlight: $select.search"></div>
+                    </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group">
+                    <label for="localidad">Localidad*</label>
+                    <ui-select ng-model="alumnoModalCtrl.localidad" theme="selectize">
+                    <ui-select-match placeholder=" -- Busca y selecciona la localidad --">
+                        {{ $select.selected.nombre }}
+                    </ui-select-match>
+                    <ui-select-choices repeat="l in alumnoModalCtrl.localidades | filter: $select.search track by l.nombre">
+                        <div ng-bind-html="l.nombre | highlight: $select.search"></div>
+                    </ui-select-choices>
+                    </ui-select>
+                </div>
+                 <div class="form-group">
+                    <label for="domicilio">Domicilio</label>
+                    <input id="domicilio" ng-model="alumnoModalCtrl.domicilio" class="form-control" type="text" placeholder="Ingrese el domicilio">
+                </div>
+                <div class="form-group">
+                    <label for="fijo">Teléfono</label>
+                    <input id="fijo" ng-model="alumnoModalCtrl.fijo" class="form-control" type="text" placeholder="Ingrese el teléfono fijo">
+                </div>
+                <div class="form-group">
+                    <label for="ocupacion">Ocupación</label>
+                    <input id="ocupacion" ng-model="alumnoModalCtrl.ocupacion" class="form-control" type="text" placeholder="Ingrese la ocupacion laboral">
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+</div>
+

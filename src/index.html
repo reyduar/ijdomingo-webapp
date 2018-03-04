@@ -2,7 +2,7 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inscripciones</title>
+  <title>Sistema Académico</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="css/styles.css" />
@@ -16,18 +16,16 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">    
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+  <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.css">
 </head>
 <body>
+
   <!-- Header here -->
   <div ng-include src="'app/views/header.html'"></div>
-  <!-- Contents here-->
-  <div ng-include src="'app/views/content.html'"></div>
-  <!-- Footer here-->
-  <div ng-include src="'app/views/footer.html'"></div> 
-  
+
   <!-- JQuery Library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
   <!-- Bootstrap Library -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
@@ -41,27 +39,58 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
+  <!-- Angular Toastr Library -->
+  <script type='text/javascript' src="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.tpls.js"></script>
+  <!-- Angular Loading bar Library -->
+ <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
+ <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular-animate.js"></script>
+  <!-- lodash Library -->
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
+  <script type="text/javascript" src="js/angular-jwt.js"></script>
   <script type="text/javascript" src="js/select.js"></script>
-   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
   <!-- My js files [conf, controllers, services]  -->
   <script type="text/javascript" src="env.js"></script>
   <script type="text/javascript" src="app.js"></script>
   
-  <script type="text/javascript" src="app/controllers/homeController.js"></script>
-  <script type="text/javascript" src="app/controllers/cursoController.js"></script>
-  <script type="text/javascript" src="app/controllers/docenteController.js"></script>
-  <script type="text/javascript" src="app/controllers/alumnoController.js"></script>
-  <script type="text/javascript" src="app/controllers/inscripcionController.js"></script>
-  <script type="text/javascript" src="app/controllers/notaController.js"></script>
-  <script type="text/javascript" src="app/controllers/editarInscripcionController.js"></script>
-  <script type="text/javascript" src="app/controllers/asistenciaController.js"></script>
-  <script type="text/javascript" src="app/controllers/docenteModalController.js"></script>
-  <script type="text/javascript" src="app/controllers/alumnoModalController.js"></script>
-  <script type="text/javascript" src="app/controllers/notaModalController.js"></script>
-  <script type="text/javascript" src="app/controllers/cursoModalController.js"></script>
+  <script type="text/javascript" src="app/controllers/inscripcion.new.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/inscripcion.edit.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/inscripcion.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/curso.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/provincia.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/periodo.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/localidad.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/docente.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/alumno.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/nota.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/asistencia.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/docente.new.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/alumno.new.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/nota.new.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/curso.new.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/usuario.new.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/provincia.new.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/periodo.new.controller.js"></script>
+  <script type="text/javascript" src="app/controllers/localidad.new.controller.js"></script>
   <script type="text/javascript" src="app/controllers/navController.js"></script>
-  <script type="text/javascript" src="app/controllers/loginController.js"></script>
+  <script type="text/javascript" src="app/controllers/login.controller.js"></script>
   <script type="text/javascript" src="app/services/apiService.js"></script>
+  <script type="text/javascript" src="app/services/curso.service.js"></script>
+  <script type="text/javascript" src="app/services/periodo.service.js"></script>
+  <script type="text/javascript" src="app/services/provincia.service.js"></script>
+  <script type="text/javascript" src="app/services/localidad.service.js"></script>
+  <script type="text/javascript" src="app/services/alumno.service.js"></script>
+  <script type="text/javascript" src="app/services/nacionalidad.service.js"></script>
+  <script type="text/javascript" src="app/services/docente.service.js"></script>
+  <script type="text/javascript" src="app/services/inscripcion.service.js"></script>
+  <script type="text/javascript" src="app/services/asistencia.service.js"></script>
+  <script type="text/javascript" src="app/services/nota.service.js"></script>
+  <script type="text/javascript" src="app/services/usuario.service.js"></script>
+  <script type="text/javascript" src="app/services/auth.service.js"></script>
+  <script type="text/javascript" src="app/services/authTokenInterceptor.service.js"></script>
+  <script type="text/javascript" src="app/directives/usuarioLabel.js"></script>
   <script type="text/javascript" src="app/directives/excelExportDirective.js"></script>
+  <script type="text/javascript" src="app/directives/periodoNavItem.js"></script>
+  <script type="text/javascript" src="app/directives/periodoLabel.js"></script>
 </body>
 </html>

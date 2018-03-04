@@ -1,0 +1,114 @@
+
+<div class="modal-header">
+    <button id="cerrar" type="button" class="close" ng-click="editInsCtrl.cerrar()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4><span style="font-weight:bold;">Editar Inscripción</span></h4>
+</div>
+<form ng-submit="editInsCtrl.onClickGuardar()">
+<div id="modal-editar-inscripcion" class="modal-body">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Datos del Alumno
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="alumno">Alumno</label>
+                    <ui-select ng-model="editInsCtrl.alumno" theme="selectize">
+                        <ui-select-match placeholder=" -- Busca y selecciona un alumno por nombre o DNI--">
+                            {{ $select.selected.nombre }} {{ $select.selected.apellido }}
+                        </ui-select-match>
+                        <ui-select-choices repeat="a in editInsCtrl.alumnos | filter: $select.search">
+                            <div ng-bind-html="( a.nombre | highlight: $select.search) + ' ' + ( a.apellido | highlight: $select.search)"></div>
+                            <small>DNI: {{ a.dni }}</small>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Datos de la Inscripción
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="curso">Periodo Lectivo</label>
+                    <ui-select ng-model="editInsCtrl.periodo" theme="selectize">
+                        <ui-select-match placeholder=" -- Busca y selecciona un periodo lectivo --" required>
+                            {{$select.selected.nombre}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="periodo in editInsCtrl.periodos | filter: $select.search">
+                            <div ng-bind-html="periodo.nombre | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group">
+                    <label for="curso">Curso</label>
+                    <ui-select ng-model="editInsCtrl.curso" theme="selectize">
+                        <ui-select-match placeholder=" -- Busca y selecciona el curso --" required>
+                            {{$select.selected.nombre}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="curso in editInsCtrl.cursos | filter: $select.search">
+                            <div ng-bind-html="curso.nombre | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group">
+                    <label for="fechaNac">Fecha de Inscripción</label>
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup='dd/MM/yyyy' ng-model="editInsCtrl.fecinsc" is-open="editInsCtrl.popup2.opened"
+                            datepicker-options="editInsCtrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="editInsCtrl.altInputFormats"
+                            placeholder="Ej. 31/12/2017" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="editInsCtrl.open2()">
+                                <i class="glyphicon glyphicon-calendar calendar-btn"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="provincia">Provincia</label>
+                            <ui-select ng-model="editInsCtrl.provincia" theme="selectize" on-select="editInsCtrl.onSelectProvincia($item)">
+                                <ui-select-match placeholder=" -- Busca y selecciona la provincia --">
+                                    {{ $select.selected.nombre }}
+                                </ui-select-match>
+                                <ui-select-choices repeat="p in editInsCtrl.provincias | filter: $select.search">
+                                    <div ng-bind-html="p.nombre | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="localidad">Localidad</label>
+                            <ui-select ng-model="editInsCtrl.localidad" theme="selectize">
+                                <ui-select-match placeholder=" -- Busca y selecciona la localidad --">
+                                    {{ $select.selected.nombre }}
+                                </ui-select-match>
+                                <ui-select-choices repeat="l in editInsCtrl.localidades | filter: $select.search">
+                                    <div ng-bind-html="l.nombre | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline">
+                    <input type="checkbox" ng-model="editInsCtrl.estadoc">Documentación Completa</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="guardar" class="btn btn-primary" type="submit">
+        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Guardar
+    </button>
+</div>
+</form>

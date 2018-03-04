@@ -1,0 +1,162 @@
+<!-- <form ng-submit="homeCtrl.enviar()">
+    <nav class="navbar-av navbar-fixed-top">
+        <div class="container" style="padding-top: 10px;">
+            <div class="navbar-brand">
+                Nueva Inscripción
+            </div>
+            <div class="btn-group pull-right">
+                <button id="enviar" class={{homeCtrl.colorButton}} type={{homeCtrl.typeButton}}>
+                   <strong style="font-size: 14px;"> <i class={{homeCtrl.iconButton}}></i> {{homeCtrl.labelButton}}</strong>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="spacing-big"></div>
+    <nav class="navbar-av navbar-fixed-top">
+        <div class={{homeCtrl.alert}} role="alert" ng-show="homeCtrl.mostarMensaje">
+            <div class="alert-custom">
+                <button type="button" class="close" ng-click="homeCtrl.dismissAlert()">&times;</button>
+                <i class={{homeCtrl.icon}}></i>
+                {{homeCtrl.alertMsg}}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+     <div class="form-group"></div>
+        <div class="panel-group">
+        <span class="label label-primary pull-right spacing">(*) Campos obligatorios</span>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                Datos de Inscripción
+              </h4>
+            </div>
+              <div class="panel-body">
+                <div class="form-group">
+                <label for="curso">Curso* </label>
+                    <ui-select ng-model="homeCtrl.cursoSeleccionado" theme="selectize">
+                    <ui-select-match placeholder=" -- Busca y selecciona el curso --" required>
+                        {{$select.selected.nombre}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="curso in homeCtrl.cursos | filter: $select.search track by curso.nombre">
+                        <div ng-bind-html="curso.nombre | highlight: $select.search"></div>
+                    </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group">
+                    <label for="fechaNac">Fecha de Inscripción* </label>
+                     <p class="input-group">
+                      <input type="text" class="form-control" uib-datepicker-popup='dd/MM/yyyy' ng-model="homeCtrl.fecinsc" is-open="homeCtrl.popup2.opened" datepicker-options="homeCtrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="homeCtrl.altInputFormats" placeholder="Ej. 31/12/2017"/>
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="homeCtrl.open2()"><i class="glyphicon glyphicon-calendar calendar-btn"></i></button>
+                      </span>
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline"><input type="checkbox" ng-model="homeCtrl.estadoc">Documentación Completa</label>
+                </div>
+              </div>
+          </div>
+          <br>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                Datos Personales
+              </h4>
+            </div>
+              <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="dni">DNI*</label>
+                            <input id="dni" ng-model="homeCtrl.dni" class="form-control" type="text" placeholder="Ingrese el DNI sin puntos ej. 31456789" ng-blur="homeCtrl.encontrarAlumno()" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellido">Apellido*</label>
+                            <input id="apellido" ng-model="homeCtrl.apellido" class="form-control" type="text" placeholder="Ingrese el apellido" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nacionalidad">Nacionalidad*</label>
+                            <ui-select ng-model="homeCtrl.nacionalidad" theme="selectize">
+                            <ui-select-match placeholder=" -- Busca y selecciona la nacionalidad --">
+                                {{$select.selected.gentilicio}}
+                            </ui-select-match>
+                            <ui-select-choices group-by="'continente'" repeat="region in homeCtrl.regiones | filter: $select.search track by region.pais">
+                                <div ng-bind-html="region.pais | highlight: $select.search"></div>
+                                <small>Nacionalidad: {{region.gentilicio}}</small>
+                            </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <div class="form-group">
+                            <label for="provincia">Provincia*</label>
+                            <ui-select ng-model="homeCtrl.provincia" theme="selectize">
+                            <ui-select-match placeholder=" -- Busca y selecciona la provincia --">
+                                {{$select.selected.nombre}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="p in homeCtrl.provincias | filter: $select.search track by p.nombre">
+                                <div ng-bind-html="p.nombre | highlight: $select.search"></div>
+                            </ui-select-choices>
+                            </ui-select>
+                        </div>
+                         <div class="form-group">
+                            <label for="barrio">Barrio</label>
+                            <input id="barrio" ng-model="homeCtrl.barrio" class="form-control" type="text" placeholder="Ingrese el barrio">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input id="email" ng-model="homeCtrl.email" class="form-control" type="email" placeholder="Ingrese una dirección correo válida">
+                        </div>
+                        <div class="form-group">
+                            <label for="celular">Celular*</label>
+                            <input id="celular" ng-model="homeCtrl.celular" class="form-control" type="text" placeholder="Ingrese el teléfono celular" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fechaNac">Fecha de Nacimiento (dia/mes/año)*: </label>
+                             <p class="input-group">
+                              <input type="text" class="form-control" uib-datepicker-popup='dd/MM/yyyy' ng-model="homeCtrl.fecnac" is-open="homeCtrl.popup1.opened" datepicker-options="homeCtrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="homeCtrl.altInputFormats" placeholder="Ej. 01/31/1985"/>
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="homeCtrl.open1()"><i class="glyphicon glyphicon-calendar calendar-btn"></i></button>
+                              </span>
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Nombre*</label>
+                            <input id="nombre" ng-model="homeCtrl.nombre" class="form-control" type="text" placeholder="Ingrese el nombre completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sexo">Sexo*</label>
+                            <ui-select ng-model="homeCtrl.sexo" theme="selectize">
+                            <ui-select-match placeholder=" -- Selecciona el sexo --">
+                                {{$select.selected.nombre}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="s in homeCtrl.sexos | filter: $select.search track by s.nombre">
+                                <div ng-bind-html="s.nombre | highlight: $select.search"></div>
+                            </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <div class="form-group">
+                            <label for="localidad">Localidad*</label>
+                            <input id="localidad" ng-model="homeCtrl.localidad" class="form-control" type="text" placeholder="Ingrese la localidad" required>
+                        </div>
+                         <div class="form-group">
+                            <label for="domicilio">Domicilio</label>
+                            <input id="domicilio" ng-model="homeCtrl.domicilio" class="form-control" type="text" placeholder="Ingrese el domicilio">
+                        </div>
+                        <div class="form-group">
+                            <label for="fijo">Teléfono</label>
+                            <input id="fijo" ng-model="homeCtrl.fijo" class="form-control" type="text" placeholder="Ingrese el teléfono fijo">
+                        </div>
+                        <div class="form-group">
+                            <label for="ocupacion">Ocupación</label>
+                            <input id="ocupacion" ng-model="homeCtrl.ocupacion" class="form-control" type="text" placeholder="Ingrese la ocupacion laboral">
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+</form>  -->

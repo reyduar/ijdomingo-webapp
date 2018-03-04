@@ -1,0 +1,130 @@
+<nav id="sub-nav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container" style="padding-top: 10px;">
+        <div class="navbar-brand">
+            Notas
+        </div>
+
+        <div class="btn-group pull-right">
+            <div excel-export export-data="notaCtrl.exportData" file-name="{{notaCtrl.fileName}}"></div>
+            <button id="nota" class="btn btn-primary btn-lg" type="button" ng-click="notaCtrl.agregarNota()">
+                <strong style="font-size: 14px;">
+                    <i class="glyphicon glyphicon-plus-sign"></i> Nueva Nota</strong>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<div class="spacing-big"></div>
+<periodo-label></periodo-label>
+<usuario-label></usuario-label>
+<div class="spacing-big"></div>
+<div class="row">
+    <div id="filter-panel" class="collapse filter-panel">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <a href class="pull-right" ng-click="notaCtrl.restarFiltro()">
+                                <small>Limpiar filtros</small>
+                            </a>
+                            <label for="localidad">Curso*</label>
+                            <ui-select ng-model="notaCtrl.curso" theme="selectize">
+                                <ui-select-match placeholder=" -- Busca y selecciona un curso como filtro --">
+                                    {{$select.selected.nombre}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="curso in notaCtrl.cursos | filter: $select.search track by curso.nombre">
+                                    <div ng-bind-html="curso.nombre | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="provincia">Provincia*</label>
+                            <ui-select ng-model="notaCtrl.provincia" theme="selectize" on-select="notaCtrl.onSelectProvincia($item)">
+                                <ui-select-match placeholder=" -- Busca y selecciona la provincia --">
+                                    {{ $select.selected.nombre }}
+                                </ui-select-match>
+                                <ui-select-choices repeat="p in notaCtrl.provincias | filter: $select.search">
+                                    <div ng-bind-html="p.nombre | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="localidad">Localidad*</label>
+                            <ui-select ng-model="notaCtrl.localidad" theme="selectize">
+                                <ui-select-match placeholder=" -- Busca y selecciona la localidad --">
+                                    {{ $select.selected.nombre }}
+                                </ui-select-match>
+                                <ui-select-choices repeat="l in notaCtrl.localidades | filter: $select.search">
+                                    <div ng-bind-html="l.nombre | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <div class="form-group">
+                            <div class="btn-group pull-right">
+                                <button ng-click="notaCtrl.busquedaAvanzada()" type="button" class="btn btn-primary">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button ng-show="notaCtrl.verlista" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel">
+        <span class="glyphicon glyphicon-cog"></span> Busqueda Avanzada
+    </button>
+</div>
+<div class="spacing-less"></div>
+<div ng-show="notaCtrl.verlista">
+    <div class="input-group">
+        <input ng-keypress="notaCtrl.enterSearch($event)" type="text" class="form-control input-lg" placeholder="Buscar por DNI del Alumno"
+            ng-model="notaCtrl.dni">
+        <a href class="input-group-addon btn btn-primary" ng-click="notaCtrl.buscarAlumnoPorDni()">
+            <i class="glyphicon glyphicon-search" style="color: white"></i>
+        </a>
+    </div>
+    <table class="table table-hover table-striped table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center">DNI</th>
+                <th class="text-center">Alumno</th>
+                <th class="text-center">Curso</th>
+                <th class="text-center">Parcial</th>
+                <th class="text-center">Final</th>
+                <th class="text-center">Total</th>
+                <th class="text-center">%Asistencia</th>
+                <th class="text-center">ver | Editar | Borrar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="nota in notaCtrl.notas">
+                <td>{{nota.alumno.dni}}</td>
+                <td>{{nota.alumno.nombre}} {{nota.alumno.apellido}}</td>
+                <td>{{nota.curso.nombre}}</td>
+                <td>{{nota.exaparcial}}</td>
+                <td>{{nota.exafinal}}</td>
+                <td>{{nota.exatotal}}</td>
+                <td>{{nota.asistencia}}</td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        <a ng-click="notaCtrl.verOnClick(nota)" class="btn btn-sm btn-default">
+                            <i class="fa fa-search"></i>
+                        </a>
+                        <a ng-click="notaCtrl.agregarNota(nota)" class="btn btn-sm btn-primary">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <a ng-click="notaCtrl.borrarOnClick($index, nota)" class="btn btn-sm btn-default">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

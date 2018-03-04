@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <button id="cerrar" type="button" class="close" ng-click="provinciaModalCtrl.cerrar()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4>
+        <span style="font-weight:bold;">{{provinciaModalCtrl.titulo}}</span>
+    </h4>
+</div>
+<form ng-submit="provinciaModalCtrl.onClickGuardar()">
+    <div id="modal-alumno" class="modal-body">
+        <div class="form-group">
+            <label for="nombre">Nombre*</label>
+            <input id="nombre" ng-model="provinciaModalCtrl.nombre" class="form-control" type="text" placeholder="Ingrese el nombre de la provincia"
+                required autofocus>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="guardar" class="btn btn-primary" type="submit">
+            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Guardar
+        </button>
+    </div>
+</form>

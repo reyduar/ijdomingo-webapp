@@ -1,0 +1,133 @@
+<form>
+    <nav id="sub-nav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container" style="padding-top: 10px;">
+            <div class="navbar-brand">
+                Asistencia
+            </div>
+            <div class="btn-group pull-right">
+                <div excel-export export-data="asiCtrl.exportData" file-name="{{asiCtrl.fileName}}" ng-if="asiCtrl.exportData.length > 0"></div>
+                <button type="button"  class="btn btn-primary btn-lg" data-toggle="collapse" data-target="#filter-panel">
+                    <strong style="font-size: 14px;">
+                        <i class="glyphicon glyphicon-cog"></i> Buscar o Crear Lista de Asistencia</strong>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="spacing-big"></div>
+    <periodo-label></periodo-label>
+    <usuario-label></usuario-label>
+    <div class="spacing-big"></div>
+    <div class="row">
+        <div id="filter-panel" class="collapse filter-panel">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="localidad">Curso*</label>
+                                <ui-select ng-model="asiCtrl.curso" theme="selectize">
+                                    <ui-select-match placeholder=" -- Busca y selecciona un curso como filtro --">
+                                        {{$select.selected.nombre}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="curso in asiCtrl.cursos | filter: $select.search track by curso.nombre">
+                                        <div ng-bind-html="curso.nombre | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="fecha-asistencia">Fecha de Asistencia*</label>
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup='dd/MM/yyyy' ng-model="asiCtrl.fecasis" is-open="asiCtrl.popup.opened"
+                                        datepicker-options="asiCtrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="asiCtrl.altInputFormats"
+                                        placeholder="Ej. 31/12/2017" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" ng-click="asiCtrl.open()">
+                                            <i class="glyphicon glyphicon-calendar asi-calendar-btn"></i>
+                                        </button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="provincia">Provincia*</label>
+                                <ui-select ng-model="asiCtrl.provincia" theme="selectize" on-select="asiCtrl.onSelectProvincia($item)">
+                                    <ui-select-match placeholder=" -- Busca y selecciona la provincia --">
+                                        {{ $select.selected.nombre }}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="p in asiCtrl.provincias | filter: $select.search">
+                                        <div ng-bind-html="p.nombre | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="localidad">Localidad*</label>
+                                <ui-select ng-model="asiCtrl.localidad" theme="selectize">
+                                    <ui-select-match placeholder=" -- Busca y selecciona la localidad --">
+                                        {{ $select.selected.nombre }}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="l in asiCtrl.localidades | filter: $select.search">
+                                        <div ng-bind-html="l.nombre | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="form-group">
+                                <div class="btn-group pull-right">
+                                    <button ng-click="asiCtrl.verListaOnClick()" type="button" class="btn btn-primary">
+                                        <i class="glyphicon glyphicon-check"></i>Ver Lista de Asistencia
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel">
+        <span class="glyphicon glyphicon-cog"></span> Crear | Buscar Lista de Asistencia
+    </button> -->
+    </div>
+    <div class="spacing-less"></div>
+    <div ng-if="asiCtrl.listaAsistencia.length > 0">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-search"></i>
+            </span>
+            <input id="search" type="text" class="form-control input-lg" name="search" placeholder="Buscar por DNI del Alumno" ng-model="asiCtrl.dniAlumno">
+        </div>
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+                <tr>
+                    <!-- <th class="text-center"><input type="checkbox" ng-model="asiCtrl.selectedAll" ng-change="asiCtrl.checkAll()"></th> -->
+                    <th class="text-center"></th>
+                    <th class="text-center">DNI</th>
+                    <th class="text-center">Alumno</th>
+                    <th class="text-center">Curso</th>
+                    <th class="text-center">Fecha</th>
+                    <th class="text-center">Asitencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="asis in asiCtrl.listaAsistencia | searchAsistenciaForDni:asiCtrl.dniAlumno">
+                    <td class="text-center">
+                        <input type="checkbox" ng-click="asiCtrl.checkboxSelected($index, asis)" ng-checked="asis.asistencia">
+                    </td>
+                    <td>{{asis.dni}}</td>
+                    <td>{{asis.alumno}}</td>
+                    <td>{{asis.curso}}</td>
+                    <td class="text-center">{{asis.fecha}}</td>
+                    <td class="text-center">
+                        <span ng-show="asis.asistencia" class="label label-success">PRESENTE</span>
+                        <span ng-show="!asis.asistencia" class="label label-danger">AUSENTE</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

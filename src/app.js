@@ -1,86 +1,202 @@
-(function(angular){
-/**************************************************************************
-   * Set environment values
-   *************************************************************************/
-  
+(function (angular) {
+  /**************************************************************************
+     * Set environment values
+     *************************************************************************/
+
   // Default environment variables
   var __env = {};
-  
+
   // Import variables if present
-  if(window){
+  if (window) {
     Object.assign(__env, window.__env);
   }
-  
+
   /**************************************************************************
    * Define Angular application
    *************************************************************************/
-  
-  var ngModule = angular.module('app', ['ui.bootstrap', 'ui.router', 'ngSanitize', 'ui.select']);
 
-    /**************************************************************************
-   * Make environment available in Angular
-   *************************************************************************/
-  
+  var ngModule = angular.module('app', ['ui.bootstrap', 'ui.router', 'ngSanitize', 'ui.select', 'angular-loading-bar', 'ngAnimate', 'toastr', 'ngStorage', 'angular-jwt']);
+
+  /**************************************************************************
+ * Make environment available in Angular
+ *************************************************************************/
+
   ngModule.constant('__env', __env);
-  
-  function logEnvironment($log, __env){
+
+  function logEnvironment($log, __env) {
     $log.debug('Environment variables:');
     $log.debug(__env)
   }
 
+
+  ngModule.config(function($httpProvider){
+    $httpProvider.interceptors.push('AuthTokenInterceptor');
+  });
+
+  ngModule.config(function (toastrConfig) {
+    angular.extend(toastrConfig, {
+      closeButton: true,
+      timeOut: 7000,
+      extendedTimeOut: 0,
+      autoDismiss: false,
+      containerId: 'toast-container',
+      maxOpened: 0,
+      newestOnTop: true,
+      positionClass: 'toast-top-full-width',
+      preventDuplicates: false,
+      preventOpenDuplicates: true
+    });
+  });
+
   ngModule.config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise("/");
+    function getPeriodoLectivo($rootScope, PeriodoService, $state, $log) {
+      return PeriodoService.getPeriodoActivo()
+        .then(function (response) {
+          if (!_.isEmpty(response.data.periodo))
+            $rootScope.periodo_lectivo = response.data.periodo;
+          else
+            $state.go('periodos');
+            //$log.log("Periodo Activo :" +JSON.stringify($rootScope.periodo_lectivo.nombre))
+        });
+    };
+
+    $urlRouterProvider.otherwise(function($injector) {
+      var $state = $injector.get('$state');
+      $state.go('nueva-inscripcion', { reload: true, notify: true });
+  });
 
     $stateProvider
-    .state('home', {
-        url: "/",
-        templateUrl: "app/views/home.html",
+      .state('nueva-inscripcion', {
+        url: "/nueva-inscripcion",
+        templateUrl: "app/controllers/inscripcion.new.html",
         controller: "HomeController",
-        controllerAs: "homeCtrl"
+        controllerAs: "homeCtrl",
+        resolve: {
+          periodoResolve: getPeriodoLectivo,
+          authenticate: authenticate 
+        }
       })
       .state('inscripciones', {
         url: "/inscripciones",
-        templateUrl: "app/views/inscripcion.html",
+        templateUrl: "app/controllers/inscripcion.html",
         controller: "InscripcionController",
-        controllerAs: "insCtrl"
+        controllerAs: "insCtrl",
+        resolve: {
+          periodoResolve: getPeriodoLectivo,
+          authenticate: authenticate
+        }
       })
       .state('editar', {
         url: "/editar/:id",
-        templateUrl: "app/views/editarInscripcion.html",
+        templateUrl: "app/controllers/inscripcion.edit.html",
         controller: "EditarInscripcionController",
-        controllerAs: "editInsCtrl"
+        controllerAs: "editInsCtrl",
+        resolve: {
+          periodoResolve: getPeriodoLectivo,
+          authenticate: authenticate
+        }
       })
-    .state('alumnos', {
+      .state('alumnos', {
         url: "/alumnos",
-        templateUrl: "app/views/alumno.html",
+        templateUrl: "app/controllers/alumno.html",
         controller: "AlumnoController",
-        controllerAs: "alumnoCtrl"
+        controllerAs: "alumnoCtrl",
+        resolve: {
+          authenticate: authenticate
+        }
       })
-     .state('docentes', {
+      .state('docentes', {
         url: "/docentes",
-        templateUrl: "app/views/docentes.html",
+        templateUrl: "app/controllers/docente.html",
         controller: "DocenteController",
-        controllerAs: "docCtrl"
+        controllerAs: "docCtrl",
+        resolve: {
+          authenticate: authenticate
+        }
       })
-    .state('cursos', {
+      .state('cursos', {
         url: "/cursos",
-        templateUrl: "app/views/curso.html",
+        templateUrl: "app/controllers/curso.html",
         controller: "CursoController",
-        controllerAs: "cursoCtrl"
+        controllerAs: "cursoCtrl",
+        resolve: {
+          authenticate: authenticate
+        }
       })
-     .state('asistencias', {
+      .state('provincias', {
+        url: "/provincias",
+        templateUrl: "app/controllers/provincia.html",
+        controller: "ProvinciaController",
+        controllerAs: "provinciaCtrl",
+        resolve: {
+          authenticate: authenticate
+        }
+      })
+      .state('localidades', {
+        url: "/localidades",
+        templateUrl: "app/controllers/localidad.html",
+        controller: "LocalidadController",
+        controllerAs: "localidadCtrl",
+        resolve: {
+          authenticate: authenticate
+        }
+      })
+      .state('periodos', {
+        url: "/periodos",
+        templateUrl: "app/controllers/periodo.html",
+        controller: "PeriodoController",
+        controllerAs: "periodoCtrl",
+        resolve: {
+          periodoResolve: getPeriodoLectivo,
+          authenticate: authenticate
+        }
+      })
+      .state('asistencias', {
         url: "/asistencias",
-        templateUrl: "app/views/asistencia.html",
+        templateUrl: "app/controllers/asistencia.html",
         controller: "AsistenciaController",
-        controllerAs: "asiCtrl"
+        controllerAs: "asiCtrl",
+        resolve: {
+          periodoResolve: getPeriodoLectivo,
+          authenticate: authenticate
+        }
       })
-     .state('notas', {
+      .state('notas', {
         url: "/notas",
-        templateUrl: "app/views/notas.html",
+        templateUrl: "app/controllers/notas.html",
         controller: "NotaController",
-        controllerAs: "notaCtrl"
+        controllerAs: "notaCtrl",
+        resolve: {
+          periodoResolve: getPeriodoLectivo,
+          authenticate: authenticate
+        }
       })
+      .state('login', {
+        url: "/login",
+        templateUrl: "app/controllers/login.html",
+        controller: "LoginController",
+        controllerAs: "lgCtrl"
+      })
+
+      function authenticate($q, AuthService, $state, $timeout, $log) {
+        if (!AuthService.isAuthenticated()) {
+          
+          // Resolve the promise successfully
+          return $q.when()
+        } else {
+          // The next bit of code is asynchronously tricky.
+  
+          $timeout(function() {
+            // This code runs after the authentication promise has been rejected.
+            // Go to the log-in page
+            $state.go('login')
+          })
+  
+          // Reject the authentication promise to prevent the state from loading
+          return $q.reject()
+        }
+      }
   });
 
 })(angular)

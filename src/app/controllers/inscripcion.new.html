@@ -1,0 +1,125 @@
+<form ng-submit="homeCtrl.enviar()">
+    <nav id="sub-nav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container" style="padding-top: 10px;">
+            <div class="navbar-brand">
+                Nueva Inscripción
+            </div>
+            <div class="btn-group pull-right">
+                <button id="enviar" class={{homeCtrl.colorButton}} type={{homeCtrl.typeButton}}>
+                    <strong style="font-size: 14px;">
+                        <i class={{homeCtrl.iconButton}}></i> {{homeCtrl.labelButton}}</strong>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="spacing-big"></div>
+    <periodo-label></periodo-label>
+    <usuario-label></usuario-label>
+    <div class="spacing-big"></div>
+    <div class="panel-group">
+        <span class="label label-primary pull-right spacing">(*) Campos obligatorios</span>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Datos del Alumno
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <a href class="pull-right" ng-click="homeCtrl.nuevoAlumno()">
+                        <small>
+                            <i class="glyphicon glyphicon-plus-sign"></i> Nuevo Alumno
+                        </small>
+                    </a>
+                    <label for="alumno">Alumno*</label>
+                    <ui-select ng-model="homeCtrl.alumno" theme="selectize">
+                        <ui-select-match placeholder=" -- Busca y selecciona un alumno por nombre o DNI--">
+                            {{ $select.selected.nombre }} {{ $select.selected.apellido }}
+                        </ui-select-match>
+                        <ui-select-choices repeat="a in homeCtrl.alumnos | filter: $select.search">
+                            <div ng-bind-html="( a.nombre | highlight: $select.search) + ' ' + ( a.apellido | highlight: $select.search)"></div>
+                            <small>DNI: {{ a.dni }}</small>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Datos de la Inscripción
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <a href class="pull-right" ng-click="homeCtrl.nuevoCurso()">
+                        <small>
+                            <i class="glyphicon glyphicon-plus-sign"></i> Nuevo Curso</small>
+                    </a>
+                    <label for="curso">Curso* </label>
+                    <ui-select ng-model="homeCtrl.curso" theme="selectize">
+                        <ui-select-match placeholder=" -- Busca y selecciona el curso --" required>
+                            {{$select.selected.nombre}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="curso in homeCtrl.cursos | filter: $select.search track by curso.nombre">
+                            <div ng-bind-html="curso.nombre | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group">
+                    <label for="fechaNac">Fecha de Inscripción* </label>
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup='dd/MM/yyyy' ng-model="homeCtrl.fecinsc" is-open="homeCtrl.popup2.opened"
+                            datepicker-options="homeCtrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="homeCtrl.altInputFormats"
+                            placeholder="Ej. 31/12/2017" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="homeCtrl.open2()">
+                                <i class="glyphicon glyphicon-calendar calendar-btn"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <a href class="pull-right" ng-click="homeCtrl.nuevaProvincia()">
+                                <small><i class="glyphicon glyphicon-plus-sign"></i> Nueva Provincia</small>
+                            </a>
+                            <label for="provincia">Provincia*</label>
+                            <ui-select ng-model="homeCtrl.provincia" theme="selectize" on-select="homeCtrl.onSelectProvincia($item)">
+                                <ui-select-match placeholder=" -- Busca y selecciona la provincia --">
+                                    {{ $select.selected.nombre }}
+                                </ui-select-match>
+                                <ui-select-choices repeat="p in homeCtrl.provincias | filter: $select.search">
+                                    <div ng-bind-html="p.nombre | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <a href class="pull-right" ng-click="homeCtrl.nuevaLocalidad()">
+                                <small>
+                                    <i class="glyphicon glyphicon-plus-sign"></i> Nueva Localidad</small>
+                            </a>
+                            <label for="localidad">Localidad*</label>
+                            <ui-select ng-model="homeCtrl.localidad" theme="selectize">
+                                <ui-select-match placeholder=" -- Busca y selecciona la localidad --">
+                                    {{ $select.selected.nombre }}
+                                </ui-select-match>
+                                <ui-select-choices repeat="l in homeCtrl.localidades | filter: $select.search">
+                                    <div ng-bind-html="l.nombre | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="homeCtrl.estadoc">Documentación Completa</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

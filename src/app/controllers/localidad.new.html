@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <button id="cerrar" type="button" class="close" ng-click="localidadModalCtrl.cerrar()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4><span style="font-weight:bold;">{{localidadModalCtrl.titulo}}</span></h4>
+</div>
+<form ng-submit="localidadModalCtrl.onClickGuardar()">
+<div id="modal-alumno" class="modal-body">
+    <div class="form-group">
+        <label for="provincia">Provincia* </label>
+        <ui-select ng-model="localidadModalCtrl.provincia" theme="selectize">
+        <ui-select-match placeholder=" -- Busca y selecciona una provincia --" required>
+            {{$select.selected.nombre}}
+        </ui-select-match>
+        <ui-select-choices repeat="p in localidadModalCtrl.provincias | filter: $select.search track by p.nombre">
+            <div ng-bind-html="p.nombre | highlight: $select.search"></div>
+        </ui-select-choices>
+        </ui-select>
+    </div>
+    <div class="form-group">
+        <label for="nombre">Nombre* </label>
+        <input id="nombre" ng-model="localidadModalCtrl.nombre" class="form-control" type="text" placeholder="Ingrese el nombre de la localidad" required autofocus>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="guardar" class="btn btn-primary" type="submit">
+        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true" ng-disabled=true></span> Guardar
+    </button>
+</div>
+</form>

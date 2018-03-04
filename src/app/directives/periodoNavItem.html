@@ -1,0 +1,9 @@
+<div class="form-group">
+    <h4 for="provincia"><strong>Seleccione el periodo lectivo que desea establecer activo por defecto.</strong></h4>
+    <ui-select ng-model="periodo" theme="selectize" on-select="periodoSelected($item)">
+        <ui-select-match placeholder=" -- Selecciona un Periodo Lectivo --">{{$select.selected.nombre}}</ui-select-match>
+        <ui-select-choices repeat="p in periodos | filter: $select.search">
+            <div ng-bind-html="p.nombre | highlight: $select.search"></div>
+        </ui-select-choices>
+    </ui-select>
+</div>

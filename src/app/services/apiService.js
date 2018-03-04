@@ -6,10 +6,6 @@ angular.module('app').factory('ApiService', function ApiService($http, __env) {
     editarAlumno: editarAlumno,
     buscarAlumnoPorDni: buscarAlumnoPorDni,
     borrarAlumno: borrarAlumno,
-    obtenerCursos: obtenerCursos,
-    guardarCurso: guardarCurso,
-    editarCurso: editarCurso,
-    borrarCurso: borrarCurso,
     guardarInscripcion: guardarInscripcion,
     buscarInscripciones: buscarInscripciones,
     buscarInscripcionPorId: buscarInscripcionPorId,
@@ -314,61 +310,6 @@ angular.module('app').factory('ApiService', function ApiService($http, __env) {
           return response;
       });
     }
-
-    //***********************//
-    //*Operaciones de Curso *//
-    //***********************//
-
-    // Metodo para traer todos los cursos 
-    function obtenerCursos() {
-      var uri = __env.apiUrl + 'cursos';
-      return $http({
-          url: uri,
-          method: "GET",
-          headers: { "Content-Type": "application/json" }
-      }).then(function (response) {
-          return response;
-      });
-    }
-
-    // Metodo para guardar curso
-    function guardarCurso(body) {
-      var uri = __env.apiUrl + 'curso/agregar';
-      return $http({
-          url: uri,
-          method: "POST",
-          data: body,
-          headers: { "Content-Type": "application/json" }
-      }).then(function (response) {
-          return response;
-      });
-    }
-
-    // Metodo para editar curso
-    function editarCurso(id, body) {
-      var uri = __env.apiUrl + 'curso/editar/'+ id;
-      return $http({
-          url: uri,
-          method: "PUT",
-          data: body,
-          headers: { "Content-Type": "application/json" }
-      }).then(function (response) {
-          return response;
-      });
-    }
-
-    // Metodo para borrar curso
-    function borrarCurso(id) {
-      var uri = __env.apiUrl + 'curso/borrar/' + id;
-      return $http({
-          url: uri,
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" }
-      }).then(function (response) {
-          return response;
-      });
-    }
-
 
     //*****************************//
     //*Operaciones de Inscripcion *//

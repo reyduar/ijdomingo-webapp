@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <button id="cerrar" type="button" class="close" ng-click="usuModalCtrl.cerrar()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4>
+        <span style="font-weight:bold;">{{usuModalCtrl.titulo}}</span>
+    </h4>
+</div>
+<form ng-submit="usuModalCtrl.onClickGuardar()">
+    <div id="modal-alumno" class="modal-body">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" ng-model="usuModalCtrl.nombre" class="form-control" type="text" placeholder="Ingrese su nombre." autofocus>
+        </div>
+        <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input id="apellido" ng-model="usuModalCtrl.apellido" class="form-control" type="text" placeholder="Ingrese su apellido.">
+        </div>
+        <!-- <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" ng-model="usuModalCtrl.email" class="form-control" type="text" placeholder="Ingrese su correo électronico.">
+        </div> -->
+
+        <div class="form-group">
+            <label for="username">Usuario*</label>
+            <input id="username" ng-model="usuModalCtrl.username" class="form-control" type="text" placeholder="Ingrese un nombre de usuario." required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Contraseña*</label>
+            <input id="password" ng-model="usuModalCtrl.password" class="form-control" type="password" placeholder="Ingrese una contraseña." required>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmar">Confirmar Contraseña*</label>
+            <input id="confirmar" ng-model="usuModalCtrl.confirmar" class="form-control" type="password" placeholder="Ingrese una contraseña." required>
+        </div>
+
+        <div class="form-group">
+                <label for="userkey">Llave de Registro*</label>
+                <input id="userkey" ng-model="usuModalCtrl.userkey" class="form-control" type="text" placeholder="Ingrese la llave proporcionada por el administrador del Sistema" required>
+            </div>
+    </div>
+    <div class="modal-footer">
+        <button id="guardar" class="btn btn-primary" type="submit">
+            Guardar
+        </button>
+    </div>
+</form>

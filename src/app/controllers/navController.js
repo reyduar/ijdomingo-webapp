@@ -1,23 +1,21 @@
 angular.module('app').controller('NavController', NavController);
     
-function NavController($log, $uibModal){
+function NavController($log, AuthService, $rootScope, $timeout, $state){
   
 	var self = this;
 
-	self.user = true;
-	// Metodo que llama al modal de login
-	self.mostrarLoginModal = function () {
-		var modalInstance = $uibModal.open({
-		    controller: 'LoginController',
-		    controllerAs: 'lgCtrl',
-		    templateUrl: 'app/views/login.html',
-		    size: 'sm'
-		});
+	self.viewSideBar = $rootScope.hasPermission;
+	
+	$rootScope.$watch('hasPermission', function() {
+		$timeout(function () {
+			self.viewSideBar = $rootScope.hasPermission;
+		}, 1000);
+	});
 
-		modalInstance.result.then(function (result) {
-      		// Cuando el modal retorna resultados
-    	}, function () {
-    		// Cuando el modal se cierra
-		});
-	}
+    self.cerrarSesion = function () {
+		AuthService.logout();
+		$timeout(function () {
+			$state.go('login');
+		}, 1000);
+    }
 }

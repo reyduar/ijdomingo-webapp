@@ -1,5 +1,31 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,900);
 
+.wrapper {    
+	margin-top: 80px;
+	margin-bottom: 50px;
+}
+
+.form-signin {
+max-width: 420px;
+padding: 30px 38px 66px;
+margin: 0 auto;
+background-color: #eee;
+border: 3px dotted rgba(0,0,0,0.1);  
+}
+
+.form-signin-heading {
+	text-align:center;
+	margin-bottom: 30px;
+	}
+	
+.form-control-login {
+position: relative;
+font-size: 16px;
+height: auto;
+padding: 10px;
+}
+
+	  
 * { 
 	margin: 0;
 	padding: 0px;
@@ -36,12 +62,12 @@ p {
 }
 
 .spacing {
-    padding-top: 10px;
-    padding-top-bottom: 10px;
+    padding-top: 50px;
+    padding-bottom: 10px;
 }
 
 .spacing-big {
-    margin-top: 119px;
+    margin-top: 60px;
 }
 
 .calendar-btn {
@@ -55,7 +81,7 @@ p {
 }
 
 .navbar-av {
-	margin-top: 50px;
+	margin-top: 0px;
     background: #f5f5f5;
 }
 
@@ -96,3 +122,163 @@ p {
     width: 100%;
     opacity: 0.9;
 }
+
+
+	/* remove outer padding */
+	.main .row{
+		padding: 0px;
+		margin: 0px;
+	}
+
+	/*Remove rounded coners*/
+
+	nav.sidebar.navbar {
+		border-radius: 0px;
+	}
+
+	nav.sidebar, .main{
+		-webkit-transition: margin 200ms ease-out;
+	    -moz-transition: margin 200ms ease-out;
+	    -o-transition: margin 200ms ease-out;
+	    transition: margin 200ms ease-out;
+	}
+
+	/* Add gap to nav and right windows.*/
+	.main{
+		padding: 10px 10px 0px 10px;
+	}
+
+	/* .....NavBar: Icon only with coloring/layout.....*/
+
+	/*small/medium side display*/
+	@media (min-width: 768px) {
+
+		/*Allow main to be next to Nav*/
+		.main{
+			position: absolute;
+			width: calc(100% - 40px); /*keeps 100% minus nav size*/
+			margin-left: 40px;
+			float: right;
+		}
+
+		/*lets nav bar to be showed on mouseover*/
+		nav.sidebar:hover + .main {
+			margin-left: 100px;
+		}
+
+		/*lets nav bar to be showed on mouseover*/
+		nav.sidebar:hover + .main #sub-nav{
+			margin-left: 110px;
+		}
+
+		/*Center Brand*/
+		nav.sidebar.navbar.sidebar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+			margin-left: 0px;
+		}
+		/*Center Brand*/
+		nav.sidebar .navbar-brand, nav.sidebar .navbar-header{
+			text-align: center;
+			width: 100%;
+			margin-left: 0px;
+		}
+
+		/*Center Icons*/
+		nav.sidebar a{
+			padding-right: 13px;
+		}
+
+		/*adds border top to first nav box */
+		nav.sidebar .navbar-nav > li:first-child{
+			border-top: 1px #e5e5e5 solid;
+		}
+
+		/*adds border to bottom nav boxes*/
+		nav.sidebar .navbar-nav > li{
+			border-bottom: 1px #e5e5e5 solid;
+		}
+
+		/* Colors/style dropdown box*/
+		nav.sidebar .navbar-nav .open .dropdown-menu {
+			position: static;
+			float: none;
+			width: auto;
+			margin-top: 0;
+			background-color: transparent;
+			border: 0;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+		}
+
+		/*allows nav box to use 100% width*/
+		nav.sidebar .navbar-collapse, nav.sidebar .container-fluid{
+			padding: 0 0px 0 0px;
+		}
+
+		/*colors dropdown box text */
+		.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+			color: #777;
+		}
+
+		/*gives sidebar width/height*/
+		nav.sidebar{
+			width: 200px;
+			height: 100%;
+			margin-left: -160px;
+			float: left;
+			z-index: 8000;
+			margin-bottom: 0px;
+		}
+
+		/*give sidebar 100% width;*/
+		nav.sidebar li {
+			width: 100%;
+		}
+
+		/* Move nav to full on mouse over*/
+		nav.sidebar:hover{
+			margin-left: 0px;
+		}
+		/*for hiden things when navbar hidden*/
+		.forAnimate{
+			opacity: 0;
+		}
+	}
+
+	/* .....NavBar: Fully showing nav bar..... */
+
+	@media (min-width: 2000px) {
+
+		/*Allow main to be next to Nav*/
+		.main{
+			width: calc(100% - 200px); /*keeps 100% minus nav size*/
+			margin-left: 200px;
+		}
+
+		/*Show all nav*/
+		nav.sidebar{
+			margin-left: 0px;
+			float: left;
+		}
+		/*Show hidden items on nav*/
+		nav.sidebar .forAnimate{
+			opacity: 1;
+		}
+	}
+
+	nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover, nav.sidebar .navbar-nav .open .dropdown-menu>li>a:focus {
+		color: #CCC;
+		background-color: transparent;
+	}
+
+	nav:hover .forAnimate{
+		opacity: 1;
+	}
+	section{
+		padding-left: 15px;
+	}
+
+	.csmall {
+		padding-top: 5px;
+		font-size: 12px;
+		color: #01b2fe;
+	}
