@@ -17,13 +17,19 @@ angular.module('app').factory('AuthService', function AuthService($http, __env, 
     };
 
     function isAuthenticated() {
-        if(jwtHelper.isTokenExpired($localStorage.token)){
-            $rootScope.hasPermission = false;
-            return true;
+        if(!_.isEmpty($localStorage.token)){
+            if(jwtHelper.isTokenExpired($localStorage.token)){
+                $rootScope.hasPermission = false;
+                return false;
+            }else{
+                $rootScope.hasPermission = true;
+                return true;
+            }
         }else{
-            $rootScope.hasPermission = true;
+            $rootScope.hasPermission = false;
             return false;
         }
+        
     };
 
     function login(params) {

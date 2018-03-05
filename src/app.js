@@ -73,8 +73,8 @@
         controller: "HomeController",
         controllerAs: "homeCtrl",
         resolve: {
-          periodoResolve: getPeriodoLectivo,
-          authenticate: authenticate 
+          authenticate: authenticate,
+          periodoResolve: getPeriodoLectivo
         }
       })
       .state('inscripciones', {
@@ -180,8 +180,7 @@
       })
 
       function authenticate($q, AuthService, $state, $timeout, $log) {
-        if (!AuthService.isAuthenticated()) {
-          
+        if (AuthService.isAuthenticated()) {
           // Resolve the promise successfully
           return $q.when()
         } else {

@@ -21,6 +21,7 @@ function LoginController($localStorage,  $state, AuthService, $uibModal, toastr,
                     $rootScope.hasPermission = true;
                     $localStorage.usuario = response.data.usuario.username;
                     self.gettoken();
+                    self.recordarme();
                 }
             }, function (error) {
                 self.showMessage(error.data.message, 'error');
